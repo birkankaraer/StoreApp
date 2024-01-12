@@ -1,3 +1,62 @@
 ﻿@page "/cart"
 @model CartModel
-Cart
+<div>
+	<div class="text-center display-6">
+		Cart
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Product Name</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>SubTotal</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var line in Model.Cart?.Lines ?? Enumerable.Empty<CartLine>())
+			{
+				<tr>
+					<td>@line.Product.ProductName</td>
+					<td>@line.Quantity</td>
+					<td>@line.Product.Price.ToString("c")</td>
+					<td>@((line.Quantity * line.Product.Price).ToString("c2"))</td>
+					<td>
+						<form method="post" asp-page="/cart">
+							<input type="hidden" name="productId" value="@line.Product.ProductId" />
+							<button type="submit" class="btn btn-outline-danger">
+								<i class="fa-solid fa-add"></i>
+							</button>
+						</form>
+					</td>
+					<td>
+						<form method="post" asp-page-handler="Reduce">
+							<input type="hidden" name="productId" value="@line.Product.ProductId" />
+							<button type="submit" class="btn btn-outline-danger">
+								<i class="fa-solid fa-minus"></i>
+							</button>
+						</form>
+					<td>
+						<form method="post" asp-page-handler="Remove">
+							<input type="hidden" name="productId" value="@line.Product.ProductId" />
+							<input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+							<button type="submit" class="btn btn-outline-danger">
+								<i class="fa-solid fa-trash"></i>
+							</button>
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4" class="text-right">Total:</td>
+				<td>@Model.Cart?.ComputeTotalValue().ToString("c2")</td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
