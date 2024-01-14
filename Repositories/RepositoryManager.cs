@@ -15,18 +15,23 @@ namespace Repositories
 
         private readonly ICategoryRepository _categoryrepository;
 
-        public RepositoryManager(IProductRepository productrepository, RepositoryContext context, ICategoryRepository categoryrepository)
-        {
-            _context = context;
-            _productrepository = productrepository;
-            _categoryrepository = categoryrepository;
-        }
+        private readonly IOrderRepository _orderrepository;
 
-        public IProductRepository Product => _productrepository;
+		public RepositoryManager(IProductRepository productrepository, RepositoryContext context, ICategoryRepository categoryrepository, IOrderRepository orderrepository)
+		{
+			_context = context;
+			_productrepository = productrepository;
+			_categoryrepository = categoryrepository;
+			_orderrepository = orderrepository;
+		}
+
+		public IProductRepository Product => _productrepository;
 
         public ICategoryRepository Category => _categoryrepository;
 
-        public void Save()
+        public IOrderRepository Order => _orderrepository;
+
+		public void Save()
         {
             _context.SaveChanges();
         }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services.Contracts;
+using StoreApp.Infrastructure.Extensions;
 
 namespace StoreApp.Pages
 {
@@ -9,14 +10,14 @@ namespace StoreApp.Pages
     {
         private readonly IServiceManager _manager;
 		public Cart Cart { get; set; }
+        public string ReturnUrl { get; set; } = "/";
 
-		public CartModel(IServiceManager manager, Cart cart)
+		public CartModel(IServiceManager manager,Cart cartService)
 		{
 			_manager = manager;
-			Cart = cart;
+            Cart = cartService;
 		}
 
-        public string ReturnUrl { get; set; } = "/";
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
@@ -26,9 +27,9 @@ namespace StoreApp.Pages
             Product? product = _manager.ProductService.GetOneProduct(productId,false);
             if (product is not null)
             {
-                Cart.AddItem(product, 1);
+				Cart.AddItem(product, 1);
             }
-            return RedirectToPage(new { returnUrl });
+            return RedirectToPage(new { returnUrl = returnUrl });
         }
 		//one by one reducing method
         public IActionResult OnPostReduce(int productId, string returnUrl)
@@ -42,8 +43,8 @@ namespace StoreApp.Pages
 		}
 		public IActionResult OnPostRemove(int productId, string returnUrl)
         {
-            Cart.RemoveItem(Cart.Lines.First(cl => cl.Product.ProductId.Equals(productId)).Product);
-            return RedirectToPage(new { returnUrl });
+			Cart.RemoveItem(Cart.Lines.First(cl => cl.Product.ProductId.Equals(productId)).Product);
+			return RedirectToPage(new { returnUrl });
         }
 
     }
