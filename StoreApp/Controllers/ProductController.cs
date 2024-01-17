@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Contracts;
 using Services.Contracts;
+using StoreApp.Models;
 
 namespace StoreApp.Controllers
 {
@@ -19,8 +20,18 @@ namespace StoreApp.Controllers
 
         public IActionResult Index(ProductRequestParameters p)
         {
-            var model = _manager.ProductService.GetAllProductsWithDetails(p);
-            return View(model);
+            var products = _manager.ProductService.GetAllProductsWithDetails(p);
+            var pagination = new Pagination()
+            {
+                CurrenPage = p.PageNumber,
+                ItemsPerpage = p.PageSize,
+                TotalItems = _manager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
         //endpointler manipilasyona açýktýr üzerinde çalýþmalar yapabiliriz
         public IActionResult Get([FromRoute(Name = "id")] int id)//eþleþmeler daha doðru gerçekleþsin
