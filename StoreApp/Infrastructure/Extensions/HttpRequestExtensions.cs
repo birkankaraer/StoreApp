@@ -1,4 +1,4 @@
-﻿namespace StoreApp.Infrastructe.Extensions
+﻿namespace StoreApp.Infrastructure.Extensions
 {
 	public static class HttpRequestExtensions
 	{
@@ -8,6 +8,6 @@
 				? $"{request.Path}{request.QueryString}"
 				: request.Path.ToString();
 		}
-			
+
 	}
 }

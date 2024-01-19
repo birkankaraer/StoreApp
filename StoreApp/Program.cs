@@ -1,4 +1,4 @@
-using StoreApp.Infrastructe.Extensions;
+using StoreApp.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +6,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages(); //controller olmadan da razor pageleri kullanabilecek servisi uygulamaya dahil ettik
 
 builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
 builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
@@ -20,6 +21,9 @@ app.UseSession(); //session kullanabilmek icin
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
@@ -43,8 +47,12 @@ app.UseEndpoints(endpoints =>
 
 	endpoints.MapRazorPages();
 });
+
+
+
 app.ConfigureandCheckMigration();
 app.ConfigureLocalization();
+app.ConfigureDefaultAdminUser();
 
 app.UseExceptionHandler("/error/500");
 app.UseStatusCodePagesWithReExecute("/error/{0}");

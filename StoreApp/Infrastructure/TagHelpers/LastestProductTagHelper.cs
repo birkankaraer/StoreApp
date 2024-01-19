@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Services.Contracts;
 
-namespace StoreApp.Infrastructe.TagHelpers
+namespace StoreApp.Infrastructure.TagHelpers
 {
 	[HtmlTargetElement("div", Attributes = "products")]
 	public class LastestProductTagHelper : TagHelper
 	{
 		private readonly IServiceManager _manager;
 		[HtmlAttributeName("number")]
-        public int Number { get; set; }
+		public int Number { get; set; }
 
-        public LastestProductTagHelper(IServiceManager manager)
+		public LastestProductTagHelper(IServiceManager manager)
 		{
 			_manager = manager;
 		}
@@ -39,11 +39,11 @@ namespace StoreApp.Infrastructe.TagHelpers
 				TagBuilder a = new TagBuilder("a");
 				a.Attributes.Add("href", $"/product/get/{product.ProductId}");
 				a.InnerHtml.AppendHtml(product.ProductName);
-				
+
 
 				li.InnerHtml.AppendHtml(a);
 				ul.InnerHtml.AppendHtml(li);
-			
+
 			}
 
 			div.InnerHtml.AppendHtml(h6);

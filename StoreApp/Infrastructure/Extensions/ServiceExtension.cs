@@ -5,8 +5,9 @@ using Services.Contracts;
 using Services;
 using Entities.Models;
 using StoreApp.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace StoreApp.Infrastructe.Extensions
+namespace StoreApp.Infrastructure.Extensions
 {
 	public static class ServiceExtension
 	{
@@ -17,7 +18,23 @@ namespace StoreApp.Infrastructe.Extensions
 			{
 				options.UseSqlite(configuration.GetConnectionString("sqlconnection"),
 				b => b.MigrationsAssembly("StoreApp"));
+
+				options.EnableSensitiveDataLogging(true); //bu satırı yazmamızın sebebi, veritabanı ile ilgili hataları görebilmek için. Proje yayına alınırken bu satırı silmeyi unutma.
 			});
+		}
+
+		public static void ConfigureIdentity(this IServiceCollection services)
+		{
+			services.AddIdentity<IdentityUser, IdentityRole>(options =>
+			{
+				options.SignIn.RequireConfirmedAccount = false;//kullanıcıların mail adreslerini onaylamalarını istemiyoruz.
+				options.User.RequireUniqueEmail = true;//aynı mail adresi ile birden fazla kullanıcı oluşturulmasını istemiyoruz.
+				options.Password.RequireLowercase = false;//kullanıcıların şifrelerinde küçük harf kullanmalarını istemiyoruz.
+				options.Password.RequireUppercase = false;//kullanıcıların şifrelerinde büyük harf kullanmalarını istemiyoruz.
+				options.Password.RequireDigit = false;//kullanıcıların şifrelerinde rakam kullanmalarını istemiyoruz.
+				options.Password.RequiredLength = 6;//kullanıcıların şifrelerinin en az 6 karakter olmasını istiyoruz.
+
+			}).AddEntityFrameworkStores<RepositoryContext>();
 		}
 
 		public static void ConfigureSession(this IServiceCollection services)
@@ -29,7 +46,7 @@ namespace StoreApp.Infrastructe.Extensions
 				 options.IdleTimeout = TimeSpan.FromMinutes(10);//session 10 dakika sonra sonlanacak, kullanıcı 10 dakika boyunca işlem yapmazsa session sonlanacak, kullanıcı tekrar giriş yapmak zorunda kalacak.
 			 });
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-			services.AddScoped<Cart>(c => SessionCart.GetCart(c));
+			services.AddScoped(c => SessionCart.GetCart(c));
 		}
 
 		public static void ConfigureRepositoryRegistration(this IServiceCollection services)

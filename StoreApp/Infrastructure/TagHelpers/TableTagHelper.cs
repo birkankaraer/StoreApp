@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace StoreApp.Infrastructe.TagHelpers
+namespace StoreApp.Infrastructure.TagHelpers
 {
-	[HtmlTargetElement("table"	)]
+	[HtmlTargetElement("table")]
 	public class TableTagHelper : TagHelper
 	{
 		public override void Process(TagHelperContext context, TagHelperOutput output)
