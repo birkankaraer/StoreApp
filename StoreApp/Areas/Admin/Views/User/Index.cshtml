@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IdentityUser>
+
+<div class="container my-5">
+	<h2 class="text-center">User Management</h2>
+	<div class="text-end mb-3">
+		<a asp-action="Create" class="btn btn-outline-success">
+			<i class="fa fa-solid fa-plus"></i>
+			Add User
+		</a>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>UserName</th>
+				<th>Roles</th>
+				<th>Operations</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (IdentityUser user in Model)
+			{
+				<tr>
+					<td>@user.Id</td>
+					<td>@user.UserName</td>
+					<td>
+						@foreach (var role in await UserManager.GetRolesAsync(user))
+						{
+							<span class="badge bg-primary">@role</span>
+						}
+					</td>
+					<td>
+						<div class="btn-group">
+							<a class="btn btn-warning rounded-0" asp-action="Update" asp-route-id="@user.UserName">
+								<i class="fa fa-solid fa-edit"></i>
+								Edit
+							</a>
+							<a class="btn btn-info rounded-0" asp-action="ResetPassword" asp-route-id="@user.UserName">
+								<i class="fa fa-solid fa-key"></i>
+								Reset Password
+							</a>
+							<form method="post" asp-action="DeleteOneUser">
+								<input type="hidden" name="UserName" value="@user.UserName" />
+								<button type="submit" class="btn btn-danger  rounded-0">
+									<i class="fa fa-solid fa-trash"></i>
+									Delete
+								</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

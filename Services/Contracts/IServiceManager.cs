@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities.DTOs;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +13,7 @@ namespace Services.Contracts
         IProductService ProductService { get; }
         ICategoryService CategoryService { get; }
         IOrderService OrderService { get; }
+        IAuthService AuthService { get; }
+        
     }
 }

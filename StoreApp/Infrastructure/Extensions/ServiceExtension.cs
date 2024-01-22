@@ -6,6 +6,7 @@ using Services;
 using Entities.Models;
 using StoreApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace StoreApp.Infrastructure.Extensions
 {
@@ -23,21 +24,21 @@ namespace StoreApp.Infrastructure.Extensions
 			});
 		}
 
-		public static void ConfigureIdentity(this IServiceCollection services)
-		{
-			services.AddIdentity<IdentityUser, IdentityRole>(options =>
-			{
-				options.SignIn.RequireConfirmedAccount = false;//kullanıcıların mail adreslerini onaylamalarını istemiyoruz.
-				options.User.RequireUniqueEmail = true;//aynı mail adresi ile birden fazla kullanıcı oluşturulmasını istemiyoruz.
-				options.Password.RequireLowercase = false;//kullanıcıların şifrelerinde küçük harf kullanmalarını istemiyoruz.
-				options.Password.RequireUppercase = false;//kullanıcıların şifrelerinde büyük harf kullanmalarını istemiyoruz.
-				options.Password.RequireDigit = false;//kullanıcıların şifrelerinde rakam kullanmalarını istemiyoruz.
-				options.Password.RequiredLength = 6;//kullanıcıların şifrelerinin en az 6 karakter olmasını istiyoruz.
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+            })
+            .AddEntityFrameworkStores<RepositoryContext>();
+        }
 
-			}).AddEntityFrameworkStores<RepositoryContext>();
-		}
-
-		public static void ConfigureSession(this IServiceCollection services)
+        public static void ConfigureSession(this IServiceCollection services)
 		{
 			services.AddDistributedMemoryCache(); //session kullanabilmek icin
 			services.AddSession(options =>
@@ -63,9 +64,21 @@ namespace StoreApp.Infrastructure.Extensions
 			services.AddScoped<IProductService, ProductManager>();
 			services.AddScoped<ICategoryService, CategoryManager>();
 			services.AddScoped<IOrderService, OrderManager>();
+			services.AddScoped<IAuthService, AuthManager>();
 		}
 
-		public static void ConfigureRouting(this IServiceCollection services)
+        public static void ConfigureApplicationCookie(this IServiceCollection services)
+        {
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Account/Login");
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
+            });
+        }
+
+        public static void ConfigureRouting(this IServiceCollection services)
 		{
 			services.AddRouting(options =>
 			{

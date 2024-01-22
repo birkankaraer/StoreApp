@@ -1,5 +1,5 @@
 <nav class="navbar bg-dark border-bottom navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-	<div class="container-fluid">
+	<div class="container">
 		<a class="navbar-brand" href="/">Admin <i class="fa-solid fa-screwdriver-wrench"></i></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,15 @@
 						Orders <i class="fa-solid fa-indent"></i>
 					</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" asp-controller="Role" asp-action="Index">
+						Roles <i class="fa-solid fa-id-badge"></i>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" asp-controller="User" asp-action="Index">
+						Users <i class="fa-solid fa-users"></i>
+					</a>
 			</ul>
 			<ul class="navbar-nav">
 				<a target="_blank" class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
