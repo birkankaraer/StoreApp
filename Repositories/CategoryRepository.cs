@@ -14,5 +14,10 @@ namespace Repositories
         {
             
         }
-    }
+
+		public Category? GetOneCategory(int id, bool trackChanges)
+		{
+			return FindByCondition(p => p.CategoryId.Equals(id), trackChanges);
+		}
+	}
 }

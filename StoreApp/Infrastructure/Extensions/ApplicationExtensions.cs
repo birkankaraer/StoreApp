@@ -6,7 +6,7 @@ namespace StoreApp.Infrastructure.Extensions
 {
 	public static class ApplicationExtensions
 	{
-		public static void ConfigureandCheckMigration(this IApplicationBuilder app)
+		public static void ConfigureAndCheckMigration(this IApplicationBuilder app)
 		{
 			RepositoryContext context = app
 				.ApplicationServices

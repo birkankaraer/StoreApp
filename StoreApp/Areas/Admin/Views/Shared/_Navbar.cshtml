@@ -11,40 +11,49 @@
 					<a class="nav-link active" aria-current="page" asp-controller="Dashboard"
 					   asp-action="Index">
 						Dashboard
-						<i class="fa-solid fa-gauge"></i>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" asp-controller="Product"
 					   asp-action="Index">
-						Products(@await Component.InvokeAsync("ProductSummary"))<i class="fa-solid fa-cart-shopping"></i>
+						Products(@await Component.InvokeAsync("ProductSummary"))
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" asp-controller="Category" asp-action="Index">
-						Categories <i class="fa-solid fa-list"></i>
+						Categories
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" asp-controller="Order" asp-action="Index">
-						Orders <i class="fa-solid fa-indent"></i>
+						Orders
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" asp-controller="Role" asp-action="Index">
-						Roles <i class="fa-solid fa-id-badge"></i>
+						Roles
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" asp-controller="User" asp-action="Index">
-						Users <i class="fa-solid fa-users"></i>
+						Users
 					</a>
 			</ul>
 			<ul class="navbar-nav">
-				<a target="_blank" class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
-					Web
-					<i class="fa-brands fa-app-store-ios"></i>
-				</a>
+				<li class="nav-item">
+					<a target="_blank" class="nav-link text-white" aria-current="page" asp-area="" asp-controller="Home"
+					   asp-action="Index">
+						<i class="fa fa-solid fa-search"></i>
+						Web
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" aria-current="page" asp-area="" asp-controller="Account"
+					   asp-action="Logout">
+						<i class="fa-solid fa-right-from-bracket"></i>
+						Logout
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

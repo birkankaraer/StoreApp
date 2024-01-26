@@ -19,7 +19,7 @@
 
 			<div class="d-flex justify-content-center">
 				<div class="btn btn-group">
-					<a asp-action="Get" asp-controller="product" asp-route-id="@Model.ProductId" class="btn btn-outline-secondary rounded-2">
+					<a asp-action="Get"  asp-controller="product" asp-route-id="@Model.ProductId" class="btn btn-outline-secondary rounded-2">
 						<i class="fa-solid fa-arrow-right"></i>
 					</a>
 					<form id="@Model.ProductId" asp-page="/cart" method="post">

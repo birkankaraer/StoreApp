@@ -15,7 +15,8 @@ namespace StoreApp.Controllers
 
         public IActionResult Index()
         {
-            var model =  _manager.Category.FindAll(false);
+			ViewData["Title"] = "Categories";
+			var model =  _manager.Category.FindAll(false);
             return View(model);
         }
     }

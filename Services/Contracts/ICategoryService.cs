@@ -10,5 +10,10 @@ namespace Services.Contracts
     public interface ICategoryService
     {
         IEnumerable<Category> GetAllCategories(bool trackChanges);
+		Category? GetOneCategory(int id, bool trackChanges);
+		void CreateCategory(Category category);
+        void UpdateCategory(int id);
+        void DeleteCategory(int id);
+
     }
 }

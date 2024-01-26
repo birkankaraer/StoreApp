@@ -17,10 +17,47 @@ namespace Services
         {
             _manager = manager;
         }
-
-        public IEnumerable<Category> GetAllCategories(bool trackChanges)
+		public IEnumerable<Category> GetAllCategories(bool trackChanges)
         {
             return _manager.Category.FindAll(trackChanges);
         }
-    }
+
+        public void CreateCategory(Category category)
+        {
+            _manager.Category.Create(category);
+            _manager.Save();
+        }
+
+		
+		public Category? GetOneCategory(int id, bool trackChanges)
+		{
+            var category = _manager.Category.GetOneCategory(id, trackChanges);
+            if (category == null)
+            {
+				throw new Exception("Category not found!");
+			}
+            return category;
+		}
+
+		public void UpdateCategory(int id)
+		{
+			Category category = GetOneCategory(id, false);
+			if (category is not null)
+			{
+				_manager.Category.Update(category);
+				_manager.Save();
+			}
+		}
+
+		public void DeleteCategory(int id)
+		{
+			Category category = GetOneCategory(id, false);
+			if (category is not null)
+			{
+				_manager.Category.Remove(category);
+				_manager.Save();
+			}
+
+		}
+	}
 }

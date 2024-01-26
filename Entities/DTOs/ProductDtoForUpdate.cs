@@ -8,5 +8,6 @@ namespace Entities.DTOs
 {
 	public record ProductDtoForUpdate : ProductDto
 	{
+		public bool Showcase { get; set; }
 	}
 }
