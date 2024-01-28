@@ -241,9 +241,9 @@ namespace StoreApp.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "09f82f4b-faa3-49bd-af9c-77a7a71c3edc", "999d2f36-5b02-492e-9577-39462e9d10bb", "User", "USER" },
-                    { "6133d456-8b1b-418d-a70f-802eb01df547", "682558b4-e2f5-4c04-91e2-d6e92ed0bb35", "Editor", "EDITOR" },
-                    { "fc8dbd57-802c-4a2d-aa5d-aca751e2f448", "108a4e06-56ff-4308-aaf3-f17b3cc5f10d", "Admin", "ADMIN" }
+                    { "025c0466-a927-4c5c-a845-e2eb49178cfb", "40fcd5ca-a432-4faf-b49b-b43e8e602e2a", "User", "USER" },
+                    { "2b4f23b5-26ca-4749-b0a4-6887045f3ff2", "41188bba-eb1d-41e9-8f15-05298b798119", "Admin", "ADMIN" },
+                    { "aaa241fd-2015-47eb-a7d7-08091273e7cb", "6094324c-b70b-4ab5-a64a-554c6800a287", "Editor", "EDITOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -251,8 +251,8 @@ namespace StoreApp.Migrations
                 columns: new[] { "CategoryId", "CategoryName" },
                 values: new object[,]
                 {
-                    { 1, "Book" },
-                    { 2, "Electronic" }
+                    { 1, "Electronic" },
+                    { 2, "Book" }
                 });
 
             migrationBuilder.InsertData(
@@ -260,16 +260,15 @@ namespace StoreApp.Migrations
                 columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "ShowCase", "Summary" },
                 values: new object[,]
                 {
-                    { 1, 1, "/images/1.jpg", 17000m, "Computer", false, "" },
-                    { 2, 1, "/images/2.jpg", 6000m, "Keyboard", false, "" },
-                    { 3, 1, "/images/3.jpg", 500m, "Mouse", false, "" },
-                    { 4, 1, "/images/4.jpg", 7000m, "Monitor", false, "" },
-                    { 5, 1, "/images/5.jpg", 1000m, "Deck", false, "" },
-                    { 6, 2, "/images/6.jpg", 50m, "Clean Code", false, "" },
-                    { 7, 2, "/images/7.jpg", 75m, "Clean Architecture", false, "" },
-                    { 8, 2, "/images/8.jpg", 100m, "Galaxy F3", true, "" },
-                    { 9, 1, "/images/9.jpg", 125m, "Hp Mouse", true, "" },
-                    { 10, 2, "/images/10.jpg", 150m, "Microphone", true, "" }
+                    { 1, 1, "/images/12.jpg", 17000m, "Computer", false, "" },
+                    { 2, 1, "/images/8.jpg", 6000m, "Keyboard", false, "" },
+                    { 3, 1, "/images/6.jpg", 500m, "Mouse", false, "" },
+                    { 4, 1, "/images/5.jpg", 7000m, "Monitor", true, "" },
+                    { 5, 1, "/images/7.jpg", 5000m, "Tablet", false, "" },
+                    { 6, 2, "/images/1.jpg", 50m, "Clean Code", false, "" },
+                    { 7, 2, "/images/1.jpg", 75m, "Clean Architecture", false, "" },
+                    { 8, 1, "/images/9.jpg", 10000m, "Telephone", true, "" },
+                    { 9, 1, "/images/4.jpg", 1000m, "Headphones", true, "" }
                 });
 
             migrationBuilder.CreateIndex(

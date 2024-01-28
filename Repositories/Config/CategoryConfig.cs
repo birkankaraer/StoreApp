@@ -16,8 +16,8 @@ namespace Repositories.Config
 			builder.HasKey(c => c.CategoryId);
 			builder.Property(p => p.CategoryName).IsRequired();
 			builder.HasData(
-				new Category() { CategoryId = 1, CategoryName = "Book" },
-				new Category() { CategoryId = 2, CategoryName = "Electronic" }
+				new Category() { CategoryId = 1, CategoryName = "Electronic" },
+				new Category() { CategoryId = 2, CategoryName = "Book" }
 				);
 		}
 	}

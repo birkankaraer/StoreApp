@@ -19,6 +19,7 @@ namespace StoreApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Title"] = "Users";
             var users = _manager.AuthService.GetAllUsers();
             return View(users);
         }

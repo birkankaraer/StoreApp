@@ -12,7 +12,7 @@ using Repositories;
 namespace StoreApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240124071936_init")]
+    [Migration("20240128075532_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,12 +70,12 @@ namespace StoreApp.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CategoryName = "Book"
+                            CategoryName = "Electronic"
                         },
                         new
                         {
                             CategoryId = 2,
-                            CategoryName = "Electronic"
+                            CategoryName = "Book"
                         });
                 });
 
@@ -156,7 +156,7 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 1,
                             CategoryId = 1,
-                            ImageUrl = "/images/1.jpg",
+                            ImageUrl = "/images/12.jpg",
                             Price = 17000m,
                             ProductName = "Computer",
                             ShowCase = false,
@@ -166,7 +166,7 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 2,
                             CategoryId = 1,
-                            ImageUrl = "/images/2.jpg",
+                            ImageUrl = "/images/8.jpg",
                             Price = 6000m,
                             ProductName = "Keyboard",
                             ShowCase = false,
@@ -176,7 +176,7 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 3,
                             CategoryId = 1,
-                            ImageUrl = "/images/3.jpg",
+                            ImageUrl = "/images/6.jpg",
                             Price = 500m,
                             ProductName = "Mouse",
                             ShowCase = false,
@@ -186,19 +186,19 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 4,
                             CategoryId = 1,
-                            ImageUrl = "/images/4.jpg",
+                            ImageUrl = "/images/5.jpg",
                             Price = 7000m,
                             ProductName = "Monitor",
-                            ShowCase = false,
+                            ShowCase = true,
                             Summary = ""
                         },
                         new
                         {
                             ProductId = 5,
                             CategoryId = 1,
-                            ImageUrl = "/images/5.jpg",
-                            Price = 1000m,
-                            ProductName = "Deck",
+                            ImageUrl = "/images/7.jpg",
+                            Price = 5000m,
+                            ProductName = "Tablet",
                             ShowCase = false,
                             Summary = ""
                         },
@@ -206,7 +206,7 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 6,
                             CategoryId = 2,
-                            ImageUrl = "/images/6.jpg",
+                            ImageUrl = "/images/1.jpg",
                             Price = 50m,
                             ProductName = "Clean Code",
                             ShowCase = false,
@@ -216,7 +216,7 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 7,
                             CategoryId = 2,
-                            ImageUrl = "/images/7.jpg",
+                            ImageUrl = "/images/1.jpg",
                             Price = 75m,
                             ProductName = "Clean Architecture",
                             ShowCase = false,
@@ -225,10 +225,10 @@ namespace StoreApp.Migrations
                         new
                         {
                             ProductId = 8,
-                            CategoryId = 2,
-                            ImageUrl = "/images/8.jpg",
-                            Price = 100m,
-                            ProductName = "Galaxy F3",
+                            CategoryId = 1,
+                            ImageUrl = "/images/9.jpg",
+                            Price = 10000m,
+                            ProductName = "Telephone",
                             ShowCase = true,
                             Summary = ""
                         },
@@ -236,19 +236,9 @@ namespace StoreApp.Migrations
                         {
                             ProductId = 9,
                             CategoryId = 1,
-                            ImageUrl = "/images/9.jpg",
-                            Price = 125m,
-                            ProductName = "Hp Mouse",
-                            ShowCase = true,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 10,
-                            CategoryId = 2,
-                            ImageUrl = "/images/10.jpg",
-                            Price = 150m,
-                            ProductName = "Microphone",
+                            ImageUrl = "/images/4.jpg",
+                            Price = 1000m,
+                            ProductName = "Headphones",
                             ShowCase = true,
                             Summary = ""
                         });
@@ -283,22 +273,22 @@ namespace StoreApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "09f82f4b-faa3-49bd-af9c-77a7a71c3edc",
-                            ConcurrencyStamp = "999d2f36-5b02-492e-9577-39462e9d10bb",
+                            Id = "025c0466-a927-4c5c-a845-e2eb49178cfb",
+                            ConcurrencyStamp = "40fcd5ca-a432-4faf-b49b-b43e8e602e2a",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "6133d456-8b1b-418d-a70f-802eb01df547",
-                            ConcurrencyStamp = "682558b4-e2f5-4c04-91e2-d6e92ed0bb35",
+                            Id = "aaa241fd-2015-47eb-a7d7-08091273e7cb",
+                            ConcurrencyStamp = "6094324c-b70b-4ab5-a64a-554c6800a287",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
-                            Id = "fc8dbd57-802c-4a2d-aa5d-aca751e2f448",
-                            ConcurrencyStamp = "108a4e06-56ff-4308-aaf3-f17b3cc5f10d",
+                            Id = "2b4f23b5-26ca-4749-b0a4-6887045f3ff2",
+                            ConcurrencyStamp = "41188bba-eb1d-41e9-8f15-05298b798119",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

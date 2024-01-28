@@ -18,6 +18,7 @@ namespace StoreApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Title"] = "Categories";
             return View(_manager.CategoryService.GetAllCategories(false));
         }
 
