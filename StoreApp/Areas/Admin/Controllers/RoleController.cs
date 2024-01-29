@@ -6,50 +6,75 @@ using StoreApp.Areas.Admin.Models;
 
 namespace StoreApp.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-	[Authorize(Roles = "Admin")]
-	public class RoleController : Controller
-	{
-		private readonly IServiceManager _manager;
-		private readonly RoleManager<IdentityRole> _roleManager;
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+    public class RoleController : Controller
+    {
+        private readonly IServiceManager _manager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-		public RoleController(IServiceManager manager, RoleManager<IdentityRole> roleManager)
-		{
-			_manager = manager;
-			_roleManager = roleManager;
-		}
+        public RoleController(IServiceManager manager, RoleManager<IdentityRole> roleManager)
+        {
+            _manager = manager;
+            _roleManager = roleManager;
+        }
 
-		public IActionResult Index()
-		{
-			ViewData["Title"] = "Roles";
-			return View(_manager.AuthService.Roles);
-		}
-		public IActionResult Create()
-		{
-			return View();
-		}
+        public IActionResult Index()
+        {
+            ViewData["Title"] = "Roles";
+            return View(_manager.AuthService.Roles);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(RoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityRole identityRole = new IdentityRole
+                {
+                    Name = model.RoleName
+                };
+                
+                IdentityResult result = await _roleManager.CreateAsync(identityRole);
 
-		[HttpPost]
-		public async Task<IActionResult> Create(RoleViewModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				var role = new IdentityRole { Name = model.RoleName };
-				var result = await _roleManager.CreateAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(model);
 
-				if (result.Succeeded)
-				{
-					return RedirectToAction(nameof(Index));
-				}
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("Not found");
+            }
+            else
+            {
+                var result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View("Index");
+            }
+        }
 
-				foreach (var error in result.Errors)
-				{
-					ModelState.AddModelError("", error.Description);
-				}
-			}
-
-			return View(model);
-		}
-
-	}
+    }
 }

@@ -52,15 +52,15 @@ namespace StoreApp.Areas.Admin.Controllers
 		}
         [HttpPost]
         [ValidateAntiForgeryToken]
-		public IActionResult Update([FromRoute(Name = "id")] int id, Category category)
+		public IActionResult Update([FromForm] Category category)
         {
 			if (ModelState.IsValid)
             {
-				_manager.CategoryService.UpdateCategory(id);
+				_manager.CategoryService.UpdateCategory(category);
 				return RedirectToAction("Index");
 			}
 
-			return View(category);
+			return View();
 		}
 
 		public IActionResult Delete([FromRoute(Name = "id")] int id)

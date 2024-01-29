@@ -24,16 +24,19 @@
 					<td>@role.Id</td>
 					<td>@role.Name</td>
 					<td>
-						<div class="btn-group">
-							<a class="btn btn-warning rounded-0" asp-action="Update" asp-route-id="@role.Id">
-								<i class="fa fa-solid fa-edit"></i>
-								Edit
-							</a>
-							<form method="post" asp-action="Delete" asp-controller="Role" asp-route-id="@role.Id">
-								<button type="submit" class="btn btn-danger rounded-0">
-									<i class="fa fa-solid fa-trash"></i>
-									Delete
-								</button>
+						<div class="card-footer">
+							<form asp-action="Delete" asp-route-id="@role.Id" method="post">
+								<span id="confirmDeleteSpan_@role.Id" style="display:none">
+									<span>Are you sure you want to delete?</span>
+									<button type="submit" class="btn btn-danger">Yes</button>
+									<a href="#" class="btn btn-primary"
+									   onclick="confirmDelete('@role.Id', false)">No</a>
+								</span>
+
+								<span id="deleteSpan_@role.Id">
+									<a href="#" class="btn btn-danger"
+									   onclick="confirmDelete('@role.Id', true)">Delete</a>
+								</span>
 							</form>
 						</div>
 					</td>
@@ -42,3 +45,20 @@
 		</tbody>
 	</table>
 </div>
+
+@section Scripts {
+	<script>
+		function confirmDelete(uniqueId, isTrue) {
+			var deleteSpan = 'deleteSpan_' + uniqueId;
+			var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+			if (isTrue) {
+				$('#' + deleteSpan).hide();
+				$('#' + confirmDeleteSpan).show();
+			} else {
+				$('#' + deleteSpan).show();
+				$('#' + confirmDeleteSpan).hide();
+			}
+		}
+	</script>
+}

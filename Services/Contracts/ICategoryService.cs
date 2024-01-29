@@ -12,7 +12,7 @@ namespace Services.Contracts
         IEnumerable<Category> GetAllCategories(bool trackChanges);
 		Category? GetOneCategory(int id, bool trackChanges);
 		void CreateCategory(Category category);
-        void UpdateCategory(int id);
+        void UpdateCategory(Category category);
         void DeleteCategory(int id);
 
     }

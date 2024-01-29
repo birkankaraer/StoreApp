@@ -39,14 +39,12 @@ namespace Services
             return category;
 		}
 
-		public void UpdateCategory(int id)
+		public void UpdateCategory(Category category)
 		{
-			Category category = GetOneCategory(id, false);
-			if (category is not null)
-			{
+			
 				_manager.Category.Update(category);
 				_manager.Save();
-			}
+			
 		}
 
 		public void DeleteCategory(int id)
