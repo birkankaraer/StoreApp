@@ -37,8 +37,13 @@
     </div>
 </div>
 
-@section Footer {
-    <footer>
-        <!-- Add footer content here -->
-    </footer>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            lazyImages.forEach(function (img) {
+                img.src = img.dataset.src;
+            });
+        });
+    </script>
 }
