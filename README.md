@@ -1,2 +1,3 @@
 # StoreApp 
-![](https://github.com/birkankaraer/birkankaraer_public/StoreApp/Areas/storeapp.gif)
+![](https://raw.githubusercontent.com/birkankaraer/StoreApp/StoreApp/Areas/storeapp.gif)
+
