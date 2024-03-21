@@ -2,7 +2,7 @@
 
 ## Önizleme
 
-### Ana Sayfa
+### Showcase
 ![Ana Sayfa](https://github.com/birkankaraer/mywebsite/assets/139279313/309f0ed8-4bb1-473d-b8dd-07468b6eb659)
 
 ### Ürünler
